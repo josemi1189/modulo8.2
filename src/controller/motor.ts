@@ -12,8 +12,8 @@ export const principal = () => {
    muestraDatosPacientes("pediatriaMenor10", pediatriaMenor10);
 
    // Apartado 2
-   let activarProctolo = activarProtocoloUrgencia(pacientes);
-   ( activarProctolo ) ? 
+   let activarProtocolo = activarProtocoloUrgencia(pacientes);
+   ( !activarProtocolo ) ? 
       muestraMensaje("protocolo", "Activar protocolo de urgencia", "danger") 
       : muestraMensaje("protocolo", "Todo correcto", "success")
 
@@ -43,11 +43,8 @@ export const principal = () => {
 export const obtenPacientesAsignadosAPediatria = (
   pacientes: Pacientes[]
 ): Pacientes[] => {   
-   
-   let pacientesPediatria:Pacientes[] = [];
-   for ( let i = 0; i < pacientes.length; i++ ) {
-      ( pacientes[i].especialidad === "Pediatra" ) && pacientesPediatria.push(pacientes[i]);
-   }
+
+   const pacientesPediatria:Pacientes[] = pacientes.filter((paciente) => paciente.especialidad === "Pediatra")
 
    return pacientesPediatria;
 };
@@ -56,27 +53,24 @@ export const obtenPacientesAsignadosAPediatria = (
 export const obtenPacientesPediatriaMenorDe10 = (
   pacientes: Pacientes[]
 ): Pacientes[] => {   
-   
-   let pacientesPediatria:Pacientes[] = [];
-   for ( let i = 0; i < pacientes.length; i++ ) {
-      ( pacientes[i].especialidad === "Pediatra" && pacientes[i].edad < 10) && pacientesPediatria.push(pacientes[i]);
-   }
+
+   const pacientesPediatria:Pacientes[] = pacientes.filter((paciente) => 
+      paciente.especialidad === "Pediatra" && paciente.edad < 10)
 
    return pacientesPediatria;
 };
 
 // APARTADO 2
 
-// Activa protocolo si paciente con ritmo cardíaco superior a 100 y temperatura superior a 39º.
+// Activa protocolo si hay algún paciente con ritmo cardiaco superior a 100 y temperatura superior a 39º.
 const activarProtocoloUrgencia = (pacientes: Pacientes[]): boolean => {
-   let activarProctolo = false;
 
-   for ( let i = 0; i < pacientes.length; i++ ) {
-      if ( pacientes[i].frecuenciaCardiaca > 100 && pacientes[i].temperatura > 39 ){
-         activarProctolo = true;
-      }
-   }
-   return activarProctolo;
+   
+   let activarProtocolo = pacientes.some((paciente) => 
+         paciente.frecuenciaCardiaca > 100 && paciente.temperatura > 39
+      );
+      
+   return activarProtocolo;
 };
 
 // APARTADO 3
