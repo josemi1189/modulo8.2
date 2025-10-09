@@ -1,29 +1,5 @@
 import { Pacientes } from "../modelo";
 
-
-/** 
- <div class="paciente">
-        <div>
-          <div>Nombre</div>
-          <div>Apellidos</div>
-          <div>Sexo</div>
-          <div>Temperatura</div>
-          <div>Frec. Cardíaca</div>
-          <div>Especialidad</div>
-          <div>Edad</div>
-        </div>
-        <div>
-          <div>Nombre</div>
-          <div>Apellidos</div>
-          <div>Sexo</div>
-          <div>Temperatura</div>
-          <div>Frec. Cardíaca</div>
-          <div>Especialidad</div>
-          <div>Edad</div>
-        </div>
-      </div>
- * **/
-
 const creaDiv = <T>(clase:string, contenido?:T):object => {
    let nuevaCapa = document.createElement("div");
    if (nuevaCapa && nuevaCapa instanceof HTMLDivElement) {
@@ -140,9 +116,3 @@ export const muestraMensaje = (panelMensajes:string, mensaje:string, clase:strin
       capaMensaje.innerHTML = mensaje.toString();
    }
 }
-
-
-
-
-
-
